@@ -88,5 +88,19 @@ app.get('/getstudentbyquery',async(req,res)=>{
         res.send("error");
     }
 })
+app.put('/updatestudent',async(req,res)=>{
+    const {rollno,name,dept,age}=req.body;
+    try{
+        const data=await student.findOneAndUpdate({rollno},{name,dept,age},{new:true}); //deleteone returns how may data is deleted;
+        if(data)
+            res.send("updated successfully")
+        else
+            res.send("data not found")
+    }
+    catch(error)
+    {
+        res.send("error");
+    }
+})
 app.listen(3003);
 
